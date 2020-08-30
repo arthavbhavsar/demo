@@ -1,35 +1,111 @@
 const URL='https://covid19.mathdro.id/api';
 
-let app = angular.module("myApp", ['ng-fusioncharts']);
-const chartData = [
-            { label: 'Venezuela', value: '290' },
-            { label: 'Saudi', value: '260' },
-            { label: 'Canada', value: '180' },
-            { label: 'Iran', value: '140' },
-            { label: 'Russia', value: '115' },
-            { label: 'UAE', value: '100' },
-            { label: 'US', value: '30' },
-            { label: 'China', value: '30' }
-        ];
-
-         const dataSource = {
-            chart: {
-                caption: "Countries With Most Oil Reserves [2017-18]",
-                subCaption: "In MMbbl = One Million barrels",
-                xAxisName: "Country",
-                yAxisName: "Reserves (MMbbl)",
-                numberSuffix: "K",
-                theme: "fusion",
-            },
-            // Chart Data - from step 2
-            "data": chartData
-        };
-
+let app = angular.module("myApp", ["ng-fusioncharts"]);
 app.controller("myCtrl",($scope,$http)=>{ 
     
-    $scope.title="stay home stay safe";
+    $scope.myDataSource = {
+    chart: {
+      caption: "App Publishing Trend",
+      subcaption: "2012-2016",
+      xaxisname: "Years",
+      yaxisname: "Total number of apps in store",
+      formatnumberscale: "1",
+      plottooltext:
+        "<b>$dataValue</b> apps were available on <b>$seriesName</b> in $label",
+      theme: "fusion",
+      drawcrossline: "1"
+    },
 
-    $scope.myDataSource = dataSource
+    categories: [
+      {
+        category: [
+          {
+            label: "2012"
+          },
+          {
+            label: "2013"
+          },
+          {
+            label: "2014"
+          },
+          {
+            label: "2015"
+          },
+          {
+            label: "2016"
+          }
+        ]
+      }
+    ],
+
+     dataset: [
+      {
+        seriesname: "iOS App Store",
+        data: [
+          {
+            value: "125000"
+          },
+          {
+            value: "300000"
+          },
+          {
+            value: "480000"
+          },
+          {
+            value: "800000"
+          },
+          {
+            value: "1100000"
+          }
+        ]
+      },
+      {
+        seriesname: "Google Play Store",
+        data: [
+          {
+            value: "70000"
+          },
+          {
+            value: "150000"
+          },
+          {
+            value: "350000"
+          },
+          {
+            value: "600000"
+          },
+          {
+            value: "1400000"
+          }
+        ]
+      },
+      {
+        seriesname: "Amazon AppStore",
+        data: [
+          {
+            value: "10000"
+          },
+          {
+            value: "100000"
+          },
+          {
+            value: "300000"
+          },
+          {
+            value: "600000"
+          },
+          {
+            value: "900000"
+          }
+        ]
+      }
+    ]
+
+   };
+
+
+
+    $scope.title="stay home stay safe";
 
     $http.get(URL).then(  (response)=>{
 
